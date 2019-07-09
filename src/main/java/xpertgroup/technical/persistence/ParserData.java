@@ -22,6 +22,12 @@ public class ParserData {
         
     }
     
+    /***
+     * Read, parse and solve the problem
+     * @param data Map with the data
+     * @return The answer
+     * @throws PersistenceException 
+     */
     public String solveAndViewAllData(Map<String, ?> data) throws PersistenceException{
         String answer = "";
         

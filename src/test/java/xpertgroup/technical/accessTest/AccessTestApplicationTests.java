@@ -42,7 +42,6 @@ public class AccessTestApplicationTests {
             
             cube.updateCube(new Point3D(2, 2, 2), 20);
             
-            System.out.println( cube.queryCube(new Point3D(1, 1, 1), new Point3D(3, 3, 3)) );
             assertEquals(34, cube.queryCube(new Point3D(1, 1, 1), new Point3D(3, 3, 3)));
             
 	}

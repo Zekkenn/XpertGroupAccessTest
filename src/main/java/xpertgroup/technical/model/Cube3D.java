@@ -41,6 +41,11 @@ public class Cube3D {
         return this.cube[pt.getX()][pt.getY()][pt.getZ()];
     }
     
+    /***
+     * Update the cube given a point and a value 
+     * @param pt Point
+     * @param val Value
+     */
     public void updateCube( Point3D pt, long val ){
         long valUpd = val;
         if ( updates.containsKey(pt) ) valUpd = val - updates.get(pt);
@@ -48,6 +53,12 @@ public class Cube3D {
         fenwickTree.solveUpdate(this, pt, valUpd);
     }
     
+    /***
+     * Gets the sum of the cube give two points ( pt1 < pt2 )
+     * @param pt1 Point1
+     * @param pt2 Point2
+     * @return Total sum
+     */
     public long queryCube( Point3D pt1, Point3D pt2 ){
         return fenwickTree.solveQuery(this, pt1, pt2);
     }

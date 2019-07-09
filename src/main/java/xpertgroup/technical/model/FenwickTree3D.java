@@ -15,10 +15,21 @@ public class FenwickTree3D {
         
     }
     
+    /***
+     * Allows the navigation inside the binary tree
+     * @param i the integer that we're going to use in the navigation
+     * @return bit mask
+     */
     public static int LSOne(int i){
         return ( i & (-i) );
     }
     
+    /***
+     * Update a position in the cube
+     * @param cube The cube to be updated
+     * @param pt Position 
+     * @param val New value to be added (don't replace the value)
+     */
     public static void solveUpdate( Cube3D cube, Point3D pt, long val ){
         
         for ( int x = pt.getX(); x < cube.getN(); x += LSOne(x)){
@@ -30,7 +41,12 @@ public class FenwickTree3D {
         }
     }
     
-    //Calculates the internal sum of a cube with (0,0,0) and (x,y,z) expreme points
+    /***
+     * Calculates the internal sum of a cube with (0,0,0) and (x,y,z) end points
+     * @param cube Cube to be calculated
+     * @param pt End point
+     * @return Total sum
+     */
     public static long stdCube( Cube3D cube, Point3D pt ){
         long sum = 0;
         for ( int i = pt.getX(); 0 < i; i -= LSOne(i)){
@@ -43,7 +59,13 @@ public class FenwickTree3D {
         return sum;
     }
     
-    //
+    /***
+     * Gets the sum of a sub-cube given two points ( pt1 < pt2 )
+     * @param cube Initial cube
+     * @param pt1 Point 1
+     * @param pt2 Point 2
+     * @return Total sum
+     */
     public static long solveQuery( Cube3D cube, Point3D pt1, Point3D pt2 ){
         
         int x1 = pt1.getX(), y1 = pt1.getY(), z1 = pt1.getZ(), 
