@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import xpertgroup.technical.persistence.PersistenceException;
 import xpertgroup.technical.services.AccessTestServices;
 
 /**
@@ -31,8 +32,7 @@ public class AccessTestAPIController {
     public ResponseEntity<?> solveProblem(@RequestBody Map<String, ?> body) {
         try {
             return new ResponseEntity<>(services.solve(body), HttpStatus.ACCEPTED);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (PersistenceException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }

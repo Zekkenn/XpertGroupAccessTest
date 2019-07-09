@@ -51,7 +51,7 @@ public class ParserData {
                 }
                 cases--;
             } 
-        } catch( IOException e ){
+        } catch( Exception e ){
             throw new PersistenceException(PersistenceException.FORMATERROR);
         }
         

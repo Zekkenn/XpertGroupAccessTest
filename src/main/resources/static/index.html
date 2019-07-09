@@ -12,17 +12,47 @@ and open the template in the editor.
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/codemirror.css"/>
         
-        <script src="jquery-3.4.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/codemirror.js"></script>
+        <script src="https://codemirror.net/mode/javascript/javascript.js"></script>
+        
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        
         <script src="app.js"></script>
         
     </head>
 
     <body>
 
-        <textarea rows="4" cols="50">
-            At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
-        </textarea>
+        <div class="jumbotron text-center">
+            <h1>Xpert Group Access Test</h1>
+            <p>Simple Interface with REST services by Sebastian Moreno R.</p> 
+          </div>
+
+          <div class="container pb-3">
+            <div class="row">
+              <div class="col-sm-6">
+                <h3>Input Data</h3>
+                <p>Sample of Input Data... Put here your Tests Cases</p>
+                <textarea id ="input"></textarea>
+              </div>
+              <div class="col-sm-4">
+                <h3>Output Data</h3>
+                <p>This is your answer: Check it with your output...</p>
+                <textarea id ="output"></textarea>
+              </div>
+            </div>
+              <button type="button" class="btn btn-primary active pb-3" onclick="api.solveData()">View Answer</button>
+          </div>      
         
     </body>
+   
 </html>
