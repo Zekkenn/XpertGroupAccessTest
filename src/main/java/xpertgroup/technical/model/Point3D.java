@@ -46,15 +46,22 @@ public class Point3D {
     @Override
     public int hashCode() {
         // TODO Auto-generated method stub
-        return (x + "_" + y + "_" + z).hashCode();
+        return this.toString().hashCode();
     }
     
     @Override
     public boolean equals(Object obj) {
         // TODO Auto-generated method stub
-        if ( obj == null || !( obj instanceof Point3D ) ) return false;
+        if (this == obj) return true; 
+        if (obj == null) return false; 
+        if (this.getClass() != obj.getClass()) return false;
         Point3D pt = (Point3D) obj;
-        return this.hashCode() == obj.hashCode();
+        if ( !( pt.getX() == this.x && pt.getY() == this.y && pt.getZ() == this.z)) return false; 
+        return true;
     }
     
+    @Override
+    public String toString(){
+        return (x + "_" + y + "_" + z);
+    }
 }

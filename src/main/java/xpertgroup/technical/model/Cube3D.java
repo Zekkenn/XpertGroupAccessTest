@@ -42,10 +42,10 @@ public class Cube3D {
     }
     
     public void updateCube( Point3D pt, long val ){
-        long valUpd = 0;
+        long valUpd = val;
         if ( updates.containsKey(pt) ) valUpd = val - updates.get(pt);
         updates.put(pt, val);
-        fenwickTree.solveUpdate(this, pt, val);
+        fenwickTree.solveUpdate(this, pt, valUpd);
     }
     
     public long queryCube( Point3D pt1, Point3D pt2 ){
