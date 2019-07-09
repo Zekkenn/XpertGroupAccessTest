@@ -5,52 +5,38 @@
  */
 package xpertgroup.technical.model;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  *
  * @author sebastian.moreno-r
  */
 public class FenwickTree3D {
     
-    public static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-    public static BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
-    
-    private static long[][][] cube;
-    private static Map<String, Integer> updates;
+    public FenwickTree3D(){
+        
+    }
     
     public static int LSOne(int i){
         return ( i & (-i) );
     }
     
-    public static void solveUpdate( int[] data, int N ){
+    public static void solveUpdate( Cube3D cube, Point3D pt, long val ){
         
-        long val = data[3]; String point = data[0] + "_" + data[1] + "_" + data[2];
-        if ( updates.containsKey(point) ) val = val - updates.get(point);
-        
-        updates.put(point, data[3]);
-        
-        for ( int x = data[0]; x < N; x += LSOne(x)){
-            for ( int y = data[1]; y < N; y += LSOne(y)){
-                for (int z = data[2]; z < N; z += LSOne(z)){
-                    cube[x][y][z] += val;
+        for ( int x = pt.getX(); x < cube.getN(); x += LSOne(x)){
+            for ( int y = pt.getY(); y < cube.getN(); y += LSOne(y)){
+                for (int z = pt.getZ(); z < cube.getN(); z += LSOne(z)){
+                    cube.addValue(new Point3D(x, y, z), val);
                 }
             }
         }
     }
     
     //Calculates the internal sum of a cube with (0,0,0) and (x,y,z) expreme points
-    public static long stdCube( int x, int y, int z ){
+    public static long stdCube( Cube3D cube, Point3D pt ){
         long sum = 0;
-        for ( int i = x; 0 < i; i -= LSOne(i)){
-            for ( int j = y; 0 < j; j -= LSOne(j)){
-                for (int k = z; 0 < k; k -= LSOne(k)){
-                    sum += cube[i][j][k];
+        for ( int i = pt.getX(); 0 < i; i -= LSOne(i)){
+            for ( int j = pt.getY(); 0 < j; j -= LSOne(j)){
+                for (int k = pt.getZ(); 0 < k; k -= LSOne(k)){
+                    sum += cube.getValue(new Point3D(i, j, k));
                 }
             }
         }
@@ -58,17 +44,21 @@ public class FenwickTree3D {
     }
     
     //
-    public static long solveQuery( int[] data, int N ){
-        int x1 = data[0], y1 = data[1], z1 = data[2], x0 = data[3], y0 = data[4], z0 = data[5];
-        long val1 = stdCube(x0, y0, z0) - stdCube(x1-1,y0,z0) 
-                - stdCube(x0,y1-1,z0) + stdCube(x1-1,y1-1,z0);
-        long val2 = stdCube(x0, y0, z1-1) - stdCube(x1-1,y0,z1-1)
-                - stdCube(x0,y1-1,z1-1) + stdCube(x1-1,y1-1,z1-1);
+    public static long solveQuery( Cube3D cube, Point3D pt1, Point3D pt2 ){
+        
+        int x1 = pt1.getX(), y1 = pt1.getY(), z1 = pt1.getZ(), 
+                x0 = pt2.getX(), y0 = pt2.getY(), z0 = pt2.getZ();
+        
+        long val1 = stdCube(cube, new Point3D(x0, y0, z0)) - stdCube(cube, new Point3D(x1-1,y0,z0)) 
+                - stdCube(cube, new Point3D(x0,y1-1,z0)) + stdCube(cube, new Point3D(x1-1,y1-1,z0));
+        
+        long val2 = stdCube(cube, new Point3D(x0, y0, z1-1)) - stdCube(cube, new Point3D(x1-1,y0,z1-1))
+                - stdCube(cube, new Point3D(x0,y1-1,z1-1)) + stdCube(cube, new Point3D(x1-1,y1-1,z1-1));
         return val1 - val2;
     }
     
     public static void main(String[] args) throws Exception{
-        int cases = Integer.parseInt( in.readLine().trim() ), N, M, points[] = new int[6];
+        /*int cases = Integer.parseInt( in.readLine().trim() ), N, M, points[] = new int[6];
         String[] data, query;
         while ( cases > 0 ){
             data = in.readLine().trim().split(" ");
@@ -87,7 +77,7 @@ public class FenwickTree3D {
             }
             cases--;
         }
-        out.close();
+        out.close();*/
     }
     
 }
